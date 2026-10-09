@@ -1,0 +1,88 @@
+{
+  "configVersion": 1,
+  "timestamp": 1791556696774,
+  "index": "/bistro-sesc/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/bistro-sesc/favicon.ico",
+        "/bistro-sesc/index.html",
+        "/bistro-sesc/main-LQUPXYMX.js",
+        "/bistro-sesc/styles-5INURTSO.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets-locais",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "imagens-externas-cache",
+      "patterns": [
+        "https:\\/\\/www\\.sescrio\\.org\\.br\\/.*",
+        "https:\\/\\/cdnsesc\\.azureedge\\.net\\/.*"
+      ],
+      "strategy": "performance",
+      "maxSize": 15,
+      "maxAge": 604800000,
+      "timeoutMs": 3000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    },
+    {
+      "name": "dados-texto-api",
+      "patterns": [
+        "https:\\/\\/api\\.seusite\\.com\\.br\\/.*"
+      ],
+      "strategy": "freshness",
+      "maxSize": 50,
+      "maxAge": 86400000,
+      "timeoutMs": 2000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/bistro-sesc/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/bistro-sesc/index.html": "38fb66da3a44cad694dcc34b9263d4c9d2f91c13",
+    "/bistro-sesc/main-LQUPXYMX.js": "3326669b8c3a293f1e6052838097f3b13163e038",
+    "/bistro-sesc/styles-5INURTSO.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
