@@ -1,0 +1,9 @@
+ng new bistro-sesc --style=scss --ssr=false
+
+cd bistro-sesc
+code .
+
+ng g c paginas/detalhes-unidade --standalone
+
+
+ng serve

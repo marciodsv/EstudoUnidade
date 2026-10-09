@@ -1,0 +1,119 @@
+<div class="pagina-container">
+  <!-- Banner de Cabeçalho -->
+  <header class="hero-header">
+    <div class="hero-content">
+      <nav class="breadcrumb">
+        <span>Início</span> &gt; <span>Unidades</span> &gt; <span class="active">Bistrô Sesc Convento do Carmo</span>
+      </nav>
+
+      <h1>Bistrô Sesc Convento do Carmo</h1>
+      <p class="descricao-curta">
+        Bistrô do Sesc RJ em prédio histórico do século XVI na Praça XV, com culinária de base ecogastronômica.
+      </p>
+
+      <div class="distancia-topo">
+        <i class="ph ph-map-pin"></i> Rio de Janeiro, RJ - 912 m
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="conteudo">
+    <!-- Badges / Categorias -->
+    <div class="tags-container">
+      <span class="tag tag-saude">Saúde</span>
+      <span class="tag tag-lazer">Lazer</span>
+      <span class="tag tag-cultura">Cultura</span>
+    </div>
+
+    <!-- Seção Sobre -->
+    <section class="secao">
+      <h2 class="titulo-secao">Sobre</h2>
+      <p>
+        Instalado no histórico prédio do Convento do Carmo, na Praça XV, o bistrô do Sesc RJ ocupa uma edificação erguida no século XVI que já abrigou frades carmelitas e serviu de moradia à rainha D. Maria I de Portugal. Com 54 lugares em uma área de 182m², apresenta cardápio assinado pela chef Teresa Corção, baseado nos preceitos da Ecogastronomia. Os pratos valorizam a agricultura familiar fluminense, com ingredientes de pequenos produtores rurais do interior do estado.
+      </p>
+    </section>
+
+    <!-- Seção Informações -->
+    <section class="secao">
+      <h2 class="titulo-secao">Informações</h2>
+      <ul class="lista-informacoes">
+        <li>
+          <i class="ph ph-clock"></i>
+          <div>
+            <div><strong>Seg a Sex:</strong> 11h às 18h</div>
+            <div><strong>Sáb:</strong> 11h às 18h</div>
+            <div class="texto-suave">Fechado: Domingo</div>
+          </div>
+        </li>
+        <li>
+          <i class="ph ph-map-pin"></i>
+          <div>
+            <div>Rua Primeiro de Março, 1, Centro</div>
+            <div>Rio de Janeiro - RJ, 20010-000</div>
+          </div>
+        </li>
+        <li>
+          <i class="ph ph-phone"></i>
+          <div>(21) 3180-5225</div>
+        </li>
+        <li>
+          <i class="ph ph-globe"></i>
+          <div><a href="#" class="link-oficial">Site oficial</a></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Seção Instalações -->
+    <section class="secao">
+      <h2 class="titulo-secao">Instalações</h2>
+      <div class="pills-container">
+        <span class="pill">Restaurante (54 lugares)</span>
+        <span class="pill">Prédio histórico tombado</span>
+        <span class="pill">Centro Cultural do Convento do Carmo</span>
+      </div>
+    </section>
+
+    <!-- Seção Fotos -->
+    <section class="secao">
+      <h2 class="titulo-secao">Fotos</h2>
+      <p class="instrucao-foto">
+        <i class="ph ph-arrows-out-simple"></i> Toque para ampliar e ver as 6 fotos
+      </p>
+      <div class="grid-fotos">
+        <div class="foto-item" *ngFor="let foto of fotos">
+          <img [src]="foto" alt="Foto do Bistrô Sesc Convento do Carmo">
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Unidades Próximas -->
+    <section class="secao">
+      <h2 class="titulo-secao">Unidades Próximas</h2>
+      <div class="grid-unidades">
+        <div class="card-unidade" *ngFor="let unidade of unidadesProximas">
+          <div class="card-media">
+            <img *ngIf="unidade.imagem; else placeholder" [src]="unidade.imagem" [alt]="unidade.nome">
+            <ng-template #placeholder>
+              <div class="media-placeholder">
+                <i class="ph ph-image"></i>
+              </div>
+            </ng-template>
+          </div>
+          <div class="card-info">
+            <h3>{{ unidade.nome }}</h3>
+            <p><i class="ph ph-map-pin"></i> {{ unidade.local }}</p>
+            <span class="distancia-texto">{{ unidade.distancia }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Botão de Ação -->
+    <div class="acao-container">
+      <button class="btn-como-chegar">
+        <i class="ph ph-navigation-arrow"></i> Como chegar
+      </button>
+    </div>
+  </main>
+</div>
