@@ -114,7 +114,7 @@ export class DetalhesUnidadeComponent {
       nome: 'Restaurante Popular da...',
       local: 'Rio de Janeiro, RJ',
       distancia: '2,1 km',
-      imagem: 'https://www.sescrio.org.br/wp-content/uploads/2025/12/restaurante-do-povo-5-768x513.jpg'
+      imagem: 'https://www.sescrio.org.br/wp-content/uploads/2025/12/restaurante-do-povo-5-768x5133.jpg'
     }
   ];
 

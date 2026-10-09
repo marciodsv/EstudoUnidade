@@ -138,7 +138,7 @@
       </div>
     </section>
 
-    <!-- Unidades Próximas -->
+    <!-- Unidades Próximas
     <section class="secao">
       <h2 class="titulo-secao">Unidades Próximas</h2>
       <div class="grid-unidades">
@@ -154,6 +154,35 @@
               <div class="media-placeholder-default">
                 <i class="ph ph-image-broken"></i>
                 <span class="nome-bistro-placeholder">{{ nomeBistro }}</span>
+              </div>
+            </ng-template>
+          </div>
+
+          <div class="card-info">
+            <h3>{{ unidade.nome }}</h3>
+            <p><i class="ph ph-map-pin"></i> {{ unidade.local }}</p>
+            <span class="distancia-texto">{{ unidade.distancia }}</span>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- Seção Unidades Próximas -->
+    <section class="secao">
+      <h2 class="titulo-secao">Unidades Próximas</h2>
+      <div class="grid-unidades">
+        <div class="card-unidade" *ngFor="let unidade of unidadesProximas">
+          <div class="card-media">
+            <img 
+              *ngIf="unidade.imagem && !unidade.imagemErro; else unidadePlaceholder" 
+              [src]="unidade.imagem" 
+              [alt]="unidade.nome"
+              (error)="tratarErroUnidade(unidade)">
+
+            <!-- Placeholder com o nome da própria unidade próxima -->
+            <ng-template #unidadePlaceholder>
+              <div class="media-placeholder-default">
+                <i class="ph ph-image-broken"></i>
+                <span class="nome-bistro-placeholder">{{ unidade.nome }}</span>
               </div>
             </ng-template>
           </div>
