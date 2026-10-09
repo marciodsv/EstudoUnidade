@@ -4,6 +4,10 @@ import { DetalhesUnidadeComponent } from './paginas/detalhes-unidade/detalhes-un
 export const routes: Routes = [
   { 
     path: '', 
+    loadComponent: () => import('./paginas/home/home.component').then(m => m.HomeComponent) 
+  },
+  { 
+    path: '', 
     loadComponent: () => import('./componentes/unidades/unidades.component').then(m => m.UnidadesComponent) 
   },
   { 

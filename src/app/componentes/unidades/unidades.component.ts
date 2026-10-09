@@ -70,4 +70,15 @@ export class UnidadesComponent {
   irParaDetalhes(id: number): void {
     this.router.navigate(['/detalhes-unidade', id]);
   }
+  // Adicione este método dentro da classe UnidadesComponent
+// Adicione dentro da classe UnidadesComponent
+tratarErroImagemDestaque(): void {
+  if (this.unidadeDestaque) {
+    this.unidadeDestaque.imagemUrl = '';
+  }
+}
+
+tratarErroImagem(unidade: Unidade): void {
+  unidade.imagemUrl = '';
+}
 }
