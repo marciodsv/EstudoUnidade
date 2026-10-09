@@ -1,0 +1,52 @@
+<div class="unidades-container">
+  <header class="header">
+    <div class="title-group">
+      <span class="bar-accent"></span>
+      <h2>Unidades Perto de Mim</h2> <!--[cite: 1] -->
+    </div>
+    <a href="#" class="link-ver-todas">Ver todas &gt;</a> <!--[cite: 1] -->
+  </header>
+
+  @if (unidadeDestaque) {
+    <div class="card-destaque" (click)="irParaDetalhes(unidadeDestaque.id)">
+      <img [src]="unidadeDestaque.imagemUrl" [alt]="unidadeDestaque.nome" class="banner-img" />
+      <div class="overlay">
+        <span class="badge-destaque">Destaque</span> <!--[cite: 1] -->
+        <h3 class="destaque-title">{{ unidadeDestaque.nome }}</h3> <!--[cite: 1] -->
+      </div>
+    </div>
+  }
+
+  <div class="unidades-grid">
+    @for (unidade of unidades; track unidade.id) {
+      <div class="card-unidade" (click)="irParaDetalhes(unidade.id)">
+        <div class="image-wrapper">
+          @if (unidade.imagemUrl) {
+            <img [src]="unidade.imagemUrl" [alt]="unidade.nome" />
+          } @else {
+            <div class="placeholder-image">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M21 21H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"></path>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+          }
+        </div>
+
+        <div class="card-content">
+          <h4 class="unidade-nome">{{ unidade.nome }}</h4> <!--[cite: 1] -->
+          <div class="localizacao">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>{{ unidade.localizacao }}</span> <!--[cite: 1] -->
+          </div>
+          <span class="distancia">{{ unidade.distancia }}</span> <!--[cite: 1] -->
+        </div>
+      </div>
+    }
+  </div>
+</div>
