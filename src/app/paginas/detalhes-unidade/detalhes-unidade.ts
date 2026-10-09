@@ -1,12 +1,17 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-interface UnidadeProxima {
+export interface FotoItem {
+  url: string;
+  erro?: boolean;
+}
+
+export interface UnidadeProxima {
   nome: string;
   local: string;
   distancia: string;
   imagem?: string;
-  imagemErro?: boolean; // Flag para controlar se a imagem falhou ao carregar
+  imagemErro?: boolean;
 }
 
 @Component({
@@ -17,16 +22,29 @@ interface UnidadeProxima {
   styleUrls: ['./detalhes-unidade.scss']
 })
 export class DetalhesUnidadeComponent {
-  // Nome do bistrô centralizado
   nomeBistro: string = 'Bistrô Sesc Convento do Carmo';
 
-  fotos: string[] = [
-    'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg',
-    'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-2.jpg',
-    'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-3.jpg',
-    'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo.jpg'
+  // --- Banner Destaque Superior ---
+  heroImagem: string = 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg';
+  heroImagemErro: boolean = false;
+
+  tratarErroHero(): void {
+    this.heroImagemErro = true;
+  }
+
+  // --- Galeria de Fotos ---
+  fotos: FotoItem[] = [
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x13654.jpg' },
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-2.jpg' },
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-3.jpg' },
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo4.jpg' }
   ];
 
+  tratarErroFoto(foto: FotoItem): void {
+    foto.erro = true;
+  }
+
+  // --- Modal Lightbox ---
   modalAberto = false;
   fotoSelecionadaIndex = 0;
 
@@ -59,17 +77,13 @@ export class DetalhesUnidadeComponent {
     if (event.key === 'ArrowRight') this.fotoProxima();
   }
 
-  // Método disparado quando uma imagem falha ao carregar
-  tratarErroImagem(unidade: UnidadeProxima): void {
-    unidade.imagemErro = true;
-  }
-
+  // --- Unidades Próximas ---
   unidadesProximas: UnidadeProxima[] = [
     {
       nome: 'Centro de Ciências e Cultu...',
       local: 'Rio de Janeiro, RJ',
       distancia: '448 m',
-      imagem: 'https://fvinhas.github.io/sescdigital/#/unit/centro-de-ciencias-e-culturas-sesc-rj/x.jpg' // Link quebrado
+      imagem: 'https://fvinhas.github.io/sescdigital/#/unit/centro-de-ciencias-e-culturas-sesc-rj/x.jpg'
     },
     {
       nome: 'Teatro Sesc Ginástico',
@@ -90,4 +104,8 @@ export class DetalhesUnidadeComponent {
       imagem: 'https://www.sescrio.org.br/wp-content/uploads/2025/12/restaurante-do-povo-5-768x513.jpg'
     }
   ];
+
+  tratarErroUnidade(unidade: UnidadeProxima): void {
+    unidade.imagemErro = true;
+  }
 }
