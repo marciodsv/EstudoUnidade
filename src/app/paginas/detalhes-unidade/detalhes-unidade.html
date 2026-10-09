@@ -1,32 +1,29 @@
 <div class="pagina-container">
-  <!-- Banner de Cabeçalho -->
+  <!-- Header e outras seções permanecem iguais -->
   <header class="hero-header">
     <div class="hero-content">
       <nav class="breadcrumb">
         <span>Início</span> &gt; <span>Unidades</span> &gt; <span class="active">Bistrô Sesc Convento do Carmo</span>
       </nav>
-
       <h1>Bistrô Sesc Convento do Carmo</h1>
       <p class="descricao-curta">
         Bistrô do Sesc RJ em prédio histórico do século XVI na Praça XV, com culinária de base ecogastronômica.
       </p>
-
       <div class="distancia-topo">
         <i class="ph ph-map-pin"></i> Rio de Janeiro, RJ - 912 m
       </div>
     </div>
   </header>
 
-  <!-- Conteúdo Principal -->
   <main class="conteudo">
-    <!-- Badges / Categorias -->
+    <!-- Badges -->
     <div class="tags-container">
       <span class="tag tag-saude">Saúde</span>
       <span class="tag tag-lazer">Lazer</span>
       <span class="tag tag-cultura">Cultura</span>
     </div>
 
-    <!-- Seção Sobre -->
+    <!-- Sobre -->
     <section class="secao">
       <h2 class="titulo-secao">Sobre</h2>
       <p>
@@ -34,7 +31,7 @@
       </p>
     </section>
 
-    <!-- Seção Informações -->
+    <!-- Informações -->
     <section class="secao">
       <h2 class="titulo-secao">Informações</h2>
       <ul class="lista-informacoes">
@@ -64,7 +61,7 @@
       </ul>
     </section>
 
-    <!-- Seção Instalações -->
+    <!-- Instalações -->
     <section class="secao">
       <h2 class="titulo-secao">Instalações</h2>
       <div class="pills-container">
@@ -74,20 +71,24 @@
       </div>
     </section>
 
-    <!-- Seção Fotos -->
+    <!-- Seção Fotos com evento de clique -->
     <section class="secao">
       <h2 class="titulo-secao">Fotos</h2>
-      <p class="instrucao-foto">
-        <i class="ph ph-arrows-out-simple"></i> Toque para ampliar e ver as 6 fotos
+      <p class="instrucao-foto clicavel" (click)="abrirModal(0)">
+        <i class="ph ph-arrows-out-simple"></i> Toque para ampliar e ver as {{ fotos.length }} fotos
       </p>
+      
       <div class="grid-fotos">
-        <div class="foto-item" *ngFor="let foto of fotos">
+        <div 
+          class="foto-item" 
+          *ngFor="let foto of fotos; let i = index"
+          (click)="abrirModal(i)">
           <img [src]="foto" alt="Foto do Bistrô Sesc Convento do Carmo">
         </div>
       </div>
     </section>
 
-    <!-- Seção Unidades Próximas -->
+    <!-- Unidades Próximas -->
     <section class="secao">
       <h2 class="titulo-secao">Unidades Próximas</h2>
       <div class="grid-unidades">
@@ -109,11 +110,34 @@
       </div>
     </section>
 
-    <!-- Botão de Ação -->
     <div class="acao-container">
       <button class="btn-como-chegar">
         <i class="ph ph-navigation-arrow"></i> Como chegar
       </button>
     </div>
   </main>
+
+  <!-- Modal Lightbox (Ampliação de Fotos) -->
+  <div class="modal-overlay" *ngIf="modalAberto" (click)="fecharModal()">
+    <div class="modal-conteudo" (click)="$event.stopPropagation()">
+      <button class="btn-fechar" (click)="fecharModal()" aria-label="Fechar">
+        <i class="ph ph-x"></i>
+      </button>
+
+      <button class="btn-nav btn-anterior" (click)="fotoAnterior($event)" aria-label="Foto anterior">
+        <i class="ph ph-caret-left"></i>
+      </button>
+
+      <div class="container-imagem-modal">
+        <img [src]="fotos[fotoSelecionadaIndex]" [alt]="'Foto ' + (fotoSelecionadaIndex + 1)">
+        <div class="contador-fotos">
+          {{ fotoSelecionadaIndex + 1 }} / {{ fotos.length }}
+        </div>
+      </div>
+
+      <button class="btn-nav btn-proxima" (click)="fotoProxima($event)" aria-label="Próxima foto">
+        <i class="ph ph-caret-right"></i>
+      </button>
+    </div>
+  </div>
 </div>

@@ -274,3 +274,136 @@ $cor-fundo-tag-cultura: #cc9911;
     }
   }
 }
+
+/* ... Mantenha o SCSS anterior e adicione/atualize as regras abaixo ... */
+
+/* Instrução de Foto Clicável */
+.instrucao-foto.clicavel {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #555555;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #1a0b5e;
+    text-decoration: underline;
+  }
+}
+
+.foto-item {
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+
+  &:hover {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+}
+
+/* Modal Lightbox */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+
+  .modal-conteudo {
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .container-imagem-modal {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        max-width: 80vw;
+        max-height: 75vh;
+        border-radius: 8px;
+        object-fit: contain;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      }
+
+      .contador-fotos {
+        margin-top: 12px;
+        color: #ffffff;
+        font-size: 0.9rem;
+        font-weight: 500;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 4px 12px;
+        border-radius: 12px;
+      }
+    }
+
+    .btn-fechar {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      padding: 4px;
+
+      &:hover {
+        color: #cccccc;
+      }
+    }
+
+    .btn-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #ffffff;
+      font-size: 1.8rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+
+      &.btn-anterior {
+        left: -60px;
+      }
+
+      &.btn-proxima {
+        right: -60px;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-overlay {
+    .modal-conteudo {
+      .btn-nav {
+        &.btn-anterior { left: 8px; }
+        &.btn-proxima { right: 8px; }
+      }
+    }
+  }
+}
