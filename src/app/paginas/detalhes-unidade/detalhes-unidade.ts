@@ -6,6 +6,7 @@ interface UnidadeProxima {
   local: string;
   distancia: string;
   imagem?: string;
+  imagemErro?: boolean; // Flag para controlar se a imagem falhou ao carregar
 }
 
 @Component({
@@ -16,6 +17,9 @@ interface UnidadeProxima {
   styleUrls: ['./detalhes-unidade.scss']
 })
 export class DetalhesUnidadeComponent {
+  // Nome do bistrô centralizado
+  nomeBistro: string = 'Bistrô Sesc Convento do Carmo';
+
   fotos: string[] = [
     'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg',
     'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-2.jpg',
@@ -23,7 +27,6 @@ export class DetalhesUnidadeComponent {
     'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo.jpg'
   ];
 
-  // Estado do Modal Lightbox
   modalAberto = false;
   fotoSelecionadaIndex = 0;
 
@@ -51,19 +54,22 @@ export class DetalhesUnidadeComponent {
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
     if (!this.modalAberto) return;
-
     if (event.key === 'Escape') this.fecharModal();
     if (event.key === 'ArrowLeft') this.fotoAnterior();
     if (event.key === 'ArrowRight') this.fotoProxima();
   }
 
-  // Lista atualizada com as imagens das unidades próximas
+  // Método disparado quando uma imagem falha ao carregar
+  tratarErroImagem(unidade: UnidadeProxima): void {
+    unidade.imagemErro = true;
+  }
+
   unidadesProximas: UnidadeProxima[] = [
     {
       nome: 'Centro de Ciências e Cultu...',
       local: 'Rio de Janeiro, RJ',
       distancia: '448 m',
-      imagem: 'https://fvinhas.github.io/sescdigital/#/unit/centro-de-ciencias-e-culturas-sesc-rj/x.jpg'
+      imagem: 'https://fvinhas.github.io/sescdigital/#/unit/centro-de-ciencias-e-culturas-sesc-rj/x.jpg' // Link quebrado
     },
     {
       nome: 'Teatro Sesc Ginástico',

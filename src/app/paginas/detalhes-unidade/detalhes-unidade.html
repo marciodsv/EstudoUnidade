@@ -88,27 +88,40 @@
       </div>
     </section>
 
-    <!-- Unidades Próximas -->
-    <section class="secao">
-      <h2 class="titulo-secao">Unidades Próximas</h2>
-      <div class="grid-unidades">
-        <div class="card-unidade" *ngFor="let unidade of unidadesProximas">
-          <div class="card-media">
-            <img *ngIf="unidade.imagem; else placeholder" [src]="unidade.imagem" [alt]="unidade.nome">
-            <ng-template #placeholder>
-              <div class="media-placeholder">
-                <i class="ph ph-image"></i>
-              </div>
-            </ng-template>
+    <!-- ... Restante do código acima permanece igual ... -->
+
+<!-- Seção Unidades Próximas -->
+<section class="secao">
+  <h2 class="titulo-secao">Unidades Próximas</h2>
+  <div class="grid-unidades">
+    <div class="card-unidade" *ngFor="let unidade of unidadesProximas">
+      <div class="card-media">
+        <!-- Renderiza a imagem apenas se houver URL e se não deu erro de carregamento -->
+        <img 
+          *ngIf="unidade.imagem && !unidade.imagemErro; else placeholder" 
+          [src]="unidade.imagem" 
+          [alt]="unidade.nome"
+          (error)="tratarErroImagem(unidade)">
+
+        <!-- Template de Fallback (Padrão) -->
+        <ng-template #placeholder>
+          <div class="media-placeholder-default">
+            <i class="ph ph-image-broken"></i>
+            <span class="nome-bistro-placeholder">{{ nomeBistro }}</span>
           </div>
-          <div class="card-info">
-            <h3>{{ unidade.nome }}</h3>
-            <p><i class="ph ph-map-pin"></i> {{ unidade.local }}</p>
-            <span class="distancia-texto">{{ unidade.distancia }}</span>
-          </div>
-        </div>
+        </ng-template>
       </div>
-    </section>
+
+      <div class="card-info">
+        <h3>{{ unidade.nome }}</h3>
+        <p><i class="ph ph-map-pin"></i> {{ unidade.local }}</p>
+        <span class="distancia-texto">{{ unidade.distancia }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ... Restante do código ... -->
 
     <div class="acao-container">
       <button class="btn-como-chegar">
