@@ -1,5 +1,5 @@
-<div class="pagina-container">
-  <!-- Banner de Cabeçalho com Imagem de Fundo Dinâmica + Fallback -->
+<div class="pagina-wrapper">
+  <!-- Banner Panorâmico de Cabeçalho (Full Width) -->
   <header class="hero-header">
     <div class="hero-bg-container">
       <img 
@@ -11,7 +11,8 @@
       <div class="hero-overlay"></div>
     </div>
 
-    <div class="hero-content">
+    <!-- Conteúdo do Header mantido dentro dos limites de largura -->
+    <div class="container-limite hero-content">
       <nav class="breadcrumb">
         <span>Início</span> &gt; <span>Unidades</span> &gt; <span class="active">{{ nomeBistro }}</span>
       </nav>
@@ -28,15 +29,15 @@
   </header>
 
   <!-- Conteúdo Principal -->
-  <main class="conteudo">
-    <!-- Badges -->
+  <main class="container-limite conteudo">
+    <!-- Badges / Categorias -->
     <div class="tags-container">
       <span class="tag tag-saude">Saúde</span>
       <span class="tag tag-lazer">Lazer</span>
       <span class="tag tag-cultura">Cultura</span>
     </div>
 
-    <!-- Sobre -->
+    <!-- Seção Sobre -->
     <section class="secao">
       <h2 class="titulo-secao">Sobre</h2>
       <p>
@@ -44,7 +45,7 @@
       </p>
     </section>
 
-    <!-- Informações -->
+    <!-- Seção Informações -->
     <section class="secao">
       <h2 class="titulo-secao">Informações</h2>
       <ul class="lista-informacoes">
@@ -74,7 +75,7 @@
       </ul>
     </section>
 
-    <!-- Instalações -->
+    <!-- Seção Instalações -->
     <section class="secao">
       <h2 class="titulo-secao">Instalações</h2>
       <div class="pills-container">
@@ -113,7 +114,7 @@
       </div>
     </section>
 
-    <!-- Unidades Próximas -->
+    <!-- Seção Unidades Próximas -->
     <section class="secao">
       <h2 class="titulo-secao">Unidades Próximas</h2>
       <div class="grid-unidades">
@@ -142,6 +143,7 @@
       </div>
     </section>
 
+    <!-- Botão Como Chegar -->
     <div class="acao-container">
       <button class="btn-como-chegar">
         <i class="ph ph-navigation-arrow"></i> Como chegar
@@ -149,7 +151,7 @@
     </div>
   </main>
 
-  <!-- Modal Lightbox com Fallback de imagem -->
+  <!-- Modal Lightbox (Ampliação de Fotos) -->
   <div class="modal-overlay" *ngIf="modalAberto" (click)="fecharModal()">
     <div class="modal-conteudo" (click)="$event.stopPropagation()">
       <button class="btn-fechar" (click)="fecharModal()" aria-label="Fechar">

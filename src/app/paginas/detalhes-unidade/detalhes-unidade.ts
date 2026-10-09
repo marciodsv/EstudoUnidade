@@ -25,7 +25,7 @@ export class DetalhesUnidadeComponent {
   nomeBistro: string = 'Bistrô Sesc Convento do Carmo';
 
   // --- Banner Destaque Superior ---
-  heroImagem: string = 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg';
+  heroImagem: string = 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-4.jpg';
   heroImagemErro: boolean = false;
 
   tratarErroHero(): void {
@@ -34,10 +34,10 @@ export class DetalhesUnidadeComponent {
 
   // --- Galeria de Fotos ---
   fotos: FotoItem[] = [
-    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x13654.jpg' },
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg' },
     { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-2.jpg' },
     { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-3.jpg' },
-    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo4.jpg' }
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo.jpg' }
   ];
 
   tratarErroFoto(foto: FotoItem): void {
