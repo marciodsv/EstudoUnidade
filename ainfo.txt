@@ -50,3 +50,36 @@ No campo onde diz No throttling (Sem limitação), mude para Offline.
 Recarregue a página (F5).
 
 A página, as imagens já visualizadas e todo o conteúdo continuarão aparecendo perfeitamente via Cache Storage, e o aviso discreto de modo offline será exibido no topo da tela!
+
+
+===================================
+Realizando o build para o github
+
+TEM QUE SER O NOME DO REPOSITÓRIO !!!!!!!!!!!!!!!
+
+PS C:\ESTUDO\EstudoUnidades\bistro-sesc> ng build --base-href=/EstudoUnidade/                  
+Initial chunk files | Names         |  Raw size | Estimated transfer size
+main-LQUPXYMX.js    | main          | 236.47 kB |                62.43 kB
+styles-5INURTSO.css | styles        |   0 bytes |                 0 bytes
+
+                    | Initial total | 236.47 kB |                62.43 kB
+
+Application bundle generation complete. [2.160 seconds] - 2026-10-09T15:17:19.432Z
+
+Output location: C:\ESTUDO\EstudoUnidades\bistro-sesc\dist\bistro-sesc
+
+PS C:\ESTUDO\EstudoUnidades\bistro-sesc> npx angular-cli-ghpages --dir=dist/bistro-sesc/browser
+404.html file created
+🚀 Uploading via git, please wait...
+Cloning https://github.com/marciodsv/EstudoUnidade.git into C:\ESTUDO\EstudoUnidades\bistro-sesc\node_modules\.cache\gh-pages\https!github.com!marciodsv!EstudoUnidade.git
+Cleaning
+Fetching origin
+Checking out origin/gh-pages 
+Removing files
+Creating .nojekyll
+Copying files
+Adding all
+Committing
+Pushing
+🌟 Successfully published via angular-cli-ghpages! Have a nice day!
+PS C:\ESTUDO\EstudoUnidades\bistro-sesc> 
