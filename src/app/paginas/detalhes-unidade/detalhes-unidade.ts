@@ -1,5 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
+import { fromEvent, Subscription } from 'rxjs';
 
 export interface FotoItem {
   url: string;
@@ -21,13 +22,78 @@ export interface UnidadeProxima {
   templateUrl: './detalhes-unidade.html',
   styleUrls: ['./detalhes-unidade.scss']
 })
-export class DetalhesUnidadeComponent {
+export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
+  // Nome do Bistrô acessado no template
   nomeBistro: string = 'Bistrô Sesc Convento do Carmo';
 
-  // Controle do Menu Mobile
+  // Monitoramento do estado offline/online
+  estaOffline: boolean = !navigator.onLine;
+  private onlineSubscription!: Subscription;
+  private offlineSubscription!: Subscription;
+
+  // Menu Mobile
   menuMobileAberto: boolean = false;
 
+  // Banner Destaque Superior
+  heroImagem: string = 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg';
+  heroImagemErro: boolean = false;
+
+  // Galeria de Fotos
+  fotos: FotoItem[] = [
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg' },
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-2.jpg' },
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-3.jpg' },
+    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo.jpg' }
+  ];
+
+  // Modal Lightbox
+  modalAberto = false;
+  fotoSelecionadaIndex = 0;
+
+  // Lista de Unidades Próximas
+  unidadesProximas: UnidadeProxima[] = [
+    {
+      nome: 'Centro de Ciências e Cultu...',
+      local: 'Rio de Janeiro, RJ',
+      distancia: '448 m',
+      imagem: 'https://fvinhas.github.io/sescdigital/#/unit/centro-de-ciencias-e-culturas-sesc-rj/x.jpg'
+    },
+    {
+      nome: 'Teatro Sesc Ginástico',
+      local: 'Rio de Janeiro, RJ',
+      distancia: '537 m',
+      imagem: 'https://cdnsesc.azureedge.net/assets/2021/09/WhatsApp-Image-2022-01-27-at-13.17.59-1024x453.jpeg'
+    },
+    {
+      nome: 'Sesc Santa Luzia',
+      local: 'Rio de Janeiro, RJ',
+      distancia: '824 m',
+      imagem: 'https://cdnsesc.azureedge.net/assets/2021/09/ANF72682-550x330-1.jpg'
+    },
+    {
+      nome: 'Restaurante Popular da...',
+      local: 'Rio de Janeiro, RJ',
+      distancia: '2,1 km',
+      imagem: 'https://www.sescrio.org.br/wp-content/uploads/2025/12/restaurante-do-povo-5-768x513.jpg'
+    }
+  ];
+
   constructor(private location: Location) {}
+
+  ngOnInit(): void {
+    this.onlineSubscription = fromEvent(window, 'online').subscribe(() => {
+      this.estaOffline = false;
+    });
+
+    this.offlineSubscription = fromEvent(window, 'offline').subscribe(() => {
+      this.estaOffline = true;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.onlineSubscription?.unsubscribe();
+    this.offlineSubscription?.unsubscribe();
+  }
 
   voltar(): void {
     this.location.back();
@@ -37,29 +103,17 @@ export class DetalhesUnidadeComponent {
     this.menuMobileAberto = !this.menuMobileAberto;
   }
 
-  // --- Banner Destaque Superior ---
-  heroImagem: string = 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg';
-  heroImagemErro: boolean = false;
-
   tratarErroHero(): void {
     this.heroImagemErro = true;
   }
-
-  // --- Galeria de Fotos ---
-  fotos: FotoItem[] = [
-    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg' },
-    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-2.jpg' },
-    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-3.jpg' },
-    { url: 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo.jpg' }
-  ];
 
   tratarErroFoto(foto: FotoItem): void {
     foto.erro = true;
   }
 
-  // --- Modal Lightbox ---
-  modalAberto = false;
-  fotoSelecionadaIndex = 0;
+  tratarErroUnidade(unidade: UnidadeProxima): void {
+    unidade.imagemErro = true;
+  }
 
   abrirModal(index: number = 0): void {
     this.fotoSelecionadaIndex = index;
@@ -88,37 +142,5 @@ export class DetalhesUnidadeComponent {
     if (event.key === 'Escape') this.fecharModal();
     if (event.key === 'ArrowLeft') this.fotoAnterior();
     if (event.key === 'ArrowRight') this.fotoProxima();
-  }
-
-  // --- Unidades Próximas ---
-  unidadesProximas: UnidadeProxima[] = [
-    {
-      nome: 'Centro de Ciências e Cultu...',
-      local: 'Rio de Janeiro, RJ',
-      distancia: '448 m',
-      imagem: 'https://fvinhas.github.io/sescdigital/#/unit/centro-de-ciencias-e-culturas-sesc-rj/x.jpg'
-    },
-    {
-      nome: 'Teatro Sesc Ginástico',
-      local: 'Rio de Janeiro, RJ',
-      distancia: '537 m',
-      imagem: 'https://cdnsesc.azureedge.net/assets/2021/09/WhatsApp-Image-2022-01-27-at-13.17.59-1024x453.jpeg'
-    },
-    {
-      nome: 'Sesc Santa Luzia',
-      local: 'Rio de Janeiro, RJ',
-      distancia: '824 m',
-      imagem: 'https://cdnsesc.azureedge.net/assets/2021/09/ANF72682-550x330-1.jpg'
-    },
-    {
-      nome: 'Restaurante Popular da...',
-      local: 'Rio de Janeiro, RJ',
-      distancia: '2,1 km',
-      imagem: 'https://www.sescrio.org.br/wp-content/uploads/2025/12/restaurante-do-povo-5-768x5133.jpg'
-    }
-  ];
-
-  tratarErroUnidade(unidade: UnidadeProxima): void {
-    unidade.imagemErro = true;
   }
 }

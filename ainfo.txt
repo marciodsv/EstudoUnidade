@@ -7,3 +7,46 @@ ng g c paginas/detalhes-unidade --standalone
 
 
 ng serve
+
+
+preciso de um recurso para exibição das imagens e texto mesmo sem internet. me explique a melhor , considerando angular, que seja mais leve e ocupe menos espaço nos dispositivos móveis.
+
+A melhor e mais leve solução em Angular para exibição offline de imagens e dados em dispositivos móveis é a combinação do Angular PWA (Service Worker) com a Cache Storage API nativa do navegador.
+
+Por que esta é a solução mais leve e eficiente?
+Armazenamento Binário Direto: A Cache API grava as requisições HTTP e imagens no formato binário original (Blob). Outras soluções (como LocalStorage com Base64) aumentam o tamanho das imagens em até 33% devido à codificação em texto.
+
+Gestão Automática de Espaço (Cache Eviction): O Service Worker do Angular permite configurar limite de itens (maxSize) e tempo de expiração (maxAge). Quando o celular atinge o limite, ele remove automaticamente as imagens mais antigas.
+
+Zero Dependências Pesadas: É mantido pela equipe do Angular e não exige a instalação de bibliotecas externas complexas nem bancos de dados pesados no celular.
+
+ng add @angular/pwa
+
+Boas Práticas Adicionais para Economia de Espaço em CelularesFormato WebP/AVIF: 
+Converta e disponibilize imagens no formato .webp em vez de .jpg ou .png. 
+O tamanho do arquivo diminui entre 30% a 50% sem perda visível de qualidade.
+Dimensionamento Adequado: Evite carregar imagens de resolução 4K (ex: $2048 \times 1365$) no mobile se o elemento na tela possui apenas 400px de largura.Testar a Aplicação Offline: O Service Worker do Angular só é ativado em compilações de produção. Para testar localmente no VS Code, execute:Bashng build
+
+1. Iniciar o Servidor Local
+No terminal do VS Code, execute o comando apontando para a pasta gerada:
+
+Bash
+npx http-server dist/bistro-sesc/browser -p 8080 -c-1 -s
+
+2. Abrir no Navegador
+Acesse no seu navegador:
+
+http://localhost:8080
+
+3. Como Testar o Modo Offline no Navegador
+Abra o site no Chrome ou Edge (http://localhost:8080).
+
+Pressione F12 para abrir o DevTools (Ferramentas do Desenvolvedor).
+
+Vá até a aba Network (Rede).
+
+No campo onde diz No throttling (Sem limitação), mude para Offline.
+
+Recarregue a página (F5).
+
+A página, as imagens já visualizadas e todo o conteúdo continuarão aparecendo perfeitamente via Cache Storage, e o aviso discreto de modo offline será exibido no topo da tela!
