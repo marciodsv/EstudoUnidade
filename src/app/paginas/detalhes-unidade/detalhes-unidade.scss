@@ -529,3 +529,119 @@ $cor-fundo-tag-cultura: #cc9911;
     }
   }
 }
+
+/* ... Mantenha o SCSS existente e adicione/atualize as regras abaixo ... */
+
+.hero-header {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #ffffff;
+  overflow: hidden;
+
+  /* Barra de Navegação Superior Mobile (Escondida por padrão em desktops) */
+  .top-bar-mobile {
+    display: none;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+
+    .btn-circulo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(30, 30, 30, 0.85) 0%, rgba(0, 0, 0, 0.6) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: transform 0.2s, background-color 0.2s;
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .logos-mobile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #ffffff;
+
+      .logo-sesc-texto {
+        font-size: 1.6rem;
+        font-weight: 800;
+        font-style: italic;
+        letter-spacing: -1px;
+        font-family: Arial, sans-serif;
+      }
+
+      .cnc-senac-grupo {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.55rem;
+        font-weight: 700;
+        line-height: 1;
+        opacity: 0.9;
+
+        .cnc-texto { margin-bottom: 2px; }
+      }
+
+      .badge-80-anos {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        border-left: 1px solid rgba(255, 255, 255, 0.3);
+        padding-left: 8px;
+
+        .num-80 {
+          font-size: 1.5rem;
+          font-weight: 900;
+          line-height: 1;
+        }
+
+        .anos-texto {
+          font-size: 0.5rem;
+          font-weight: 700;
+          writing-mode: vertical-lr;
+          transform: rotate(180deg);
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+  }
+}
+
+/* ======================================================
+   RESPONSIVIDADE (Exibição da Top Bar em Telas Reduzidas)
+   ====================================================== */
+
+@media (max-width: 768px) {
+  .hero-header {
+    min-height: 280px;
+
+    .top-bar-mobile {
+      display: flex; /* Ativa a barra superior no mobile */
+    }
+
+    .hero-content {
+      padding-top: 20px;
+
+      /* Esconde a breadcrumb no mobile para dar foco aos logos */
+      .breadcrumb {
+        display: none;
+      }
+    }
+  }
+}

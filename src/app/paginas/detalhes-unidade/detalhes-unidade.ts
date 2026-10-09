@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 export interface FotoItem {
   url: string;
@@ -24,8 +24,21 @@ export interface UnidadeProxima {
 export class DetalhesUnidadeComponent {
   nomeBistro: string = 'Bistrô Sesc Convento do Carmo';
 
+  // Controle do Menu Mobile
+  menuMobileAberto: boolean = false;
+
+  constructor(private location: Location) {}
+
+  voltar(): void {
+    this.location.back();
+  }
+
+  toggleMenuMobile(): void {
+    this.menuMobileAberto = !this.menuMobileAberto;
+  }
+
   // --- Banner Destaque Superior ---
-  heroImagem: string = 'https://www.sescrio.org.br/wp-content/uploads/2023/10/convento-do-carmo-4.jpg';
+  heroImagem: string = 'https://www.sescrio.org.br/wp-content/uploads/2023/10/BISTRO_SESCRJ_3515-2048x1365.jpg';
   heroImagemErro: boolean = false;
 
   tratarErroHero(): void {

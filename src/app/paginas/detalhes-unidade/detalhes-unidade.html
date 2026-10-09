@@ -1,6 +1,30 @@
 <div class="pagina-wrapper">
-  <!-- Banner Panorâmico de Cabeçalho (Full Width) -->
+  <!-- Banner Panorâmico de Cabeçalho -->
   <header class="hero-header">
+    <!-- Barra Superior Mobile (Exibida em telas reduzidas) -->
+    <div class="top-bar-mobile">
+      <button class="btn-circulo" (click)="voltar()" aria-label="Voltar">
+        <i class="ph ph-arrow-left"></i>
+      </button>
+
+      <div class="logos-mobile">
+        <span class="logo-sesc-texto">Sesc</span>
+        <div class="cnc-senac-grupo">
+          <span class="cnc-texto">CNC</span>
+          <span class="senac-texto">Senac</span>
+        </div>
+        <div class="badge-80-anos">
+          <span class="num-80">80</span>
+          <span class="anos-texto">ANOS</span>
+        </div>
+      </div>
+
+      <button class="btn-circulo" (click)="toggleMenuMobile()" aria-label="Menu">
+        <i class="ph ph-list"></i>
+      </button>
+    </div>
+
+    <!-- Imagem de Fundo e Overlay -->
     <div class="hero-bg-container">
       <img 
         *ngIf="!heroImagemErro" 
@@ -11,7 +35,7 @@
       <div class="hero-overlay"></div>
     </div>
 
-    <!-- Conteúdo do Header mantido dentro dos limites de largura -->
+    <!-- Conteúdo do Header -->
     <div class="container-limite hero-content">
       <nav class="breadcrumb">
         <span>Início</span> &gt; <span>Unidades</span> &gt; <span class="active">{{ nomeBistro }}</span>
@@ -28,16 +52,16 @@
     </div>
   </header>
 
-  <!-- Conteúdo Principal -->
+  <!-- Restante do template permanece igual -->
   <main class="container-limite conteudo">
-    <!-- Badges / Categorias -->
+    <!-- Badges -->
     <div class="tags-container">
       <span class="tag tag-saude">Saúde</span>
       <span class="tag tag-lazer">Lazer</span>
       <span class="tag tag-cultura">Cultura</span>
     </div>
 
-    <!-- Seção Sobre -->
+    <!-- Sobre -->
     <section class="secao">
       <h2 class="titulo-secao">Sobre</h2>
       <p>
@@ -45,7 +69,7 @@
       </p>
     </section>
 
-    <!-- Seção Informações -->
+    <!-- Informações -->
     <section class="secao">
       <h2 class="titulo-secao">Informações</h2>
       <ul class="lista-informacoes">
@@ -75,7 +99,7 @@
       </ul>
     </section>
 
-    <!-- Seção Instalações -->
+    <!-- Instalações -->
     <section class="secao">
       <h2 class="titulo-secao">Instalações</h2>
       <div class="pills-container">
@@ -85,7 +109,7 @@
       </div>
     </section>
 
-    <!-- Seção Fotos -->
+    <!-- Fotos -->
     <section class="secao">
       <h2 class="titulo-secao">Fotos</h2>
       <p class="instrucao-foto clicavel" (click)="abrirModal(0)">
@@ -114,7 +138,7 @@
       </div>
     </section>
 
-    <!-- Seção Unidades Próximas -->
+    <!-- Unidades Próximas -->
     <section class="secao">
       <h2 class="titulo-secao">Unidades Próximas</h2>
       <div class="grid-unidades">
@@ -143,7 +167,6 @@
       </div>
     </section>
 
-    <!-- Botão Como Chegar -->
     <div class="acao-container">
       <button class="btn-como-chegar">
         <i class="ph ph-navigation-arrow"></i> Como chegar
@@ -151,7 +174,7 @@
     </div>
   </main>
 
-  <!-- Modal Lightbox (Ampliação de Fotos) -->
+  <!-- Modal Lightbox -->
   <div class="modal-overlay" *ngIf="modalAberto" (click)="fecharModal()">
     <div class="modal-conteudo" (click)="$event.stopPropagation()">
       <button class="btn-fechar" (click)="fecharModal()" aria-label="Fechar">
